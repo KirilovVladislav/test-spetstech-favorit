@@ -1,0 +1,26 @@
+.group {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: start;
+  color: var(--color-gray);
+}
+
+.label {
+  color: var(--color-gray);
+  font-size: 14px;
+  line-height: 19px;
+  margin-bottom: 4px;
+}
+
+.input {
+  height: 32px;
+  border: 1px solid #E5E5E5;
+  border-radius: var(--button-radius);
+  color: var(--color-gray);
+}
+
+.input:focus,
+.input:focus + .label {
+  color: var(--color-black);
+  outline-color: #000;
+}

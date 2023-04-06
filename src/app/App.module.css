@@ -1,0 +1,23 @@
+:root {
+  font-family: Manrope, sans-serif;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.app {
+  padding-top: 193px;
+  display: grid;
+  justify-content: center;
+  min-width: 360px;
+  min-height: 100vh;
+  background-image: var(--bg-img);
+  background-position: 50% 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+@media (width >= 1920px) {
+  .app {
+    padding-top: 214px;
+  }
+}

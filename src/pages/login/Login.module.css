@@ -1,0 +1,13 @@
+.title {
+  color: var(--color-gray);
+  font-family: Manrope, sans-serif;
+  font-size: 20px;
+  line-height: 27px;
+  justify-self: center;
+}
+
+.error {
+  color: var(--color-orange);
+  font-size: 14px;
+  line-height: 19px;
+}

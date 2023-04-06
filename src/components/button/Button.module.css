@@ -1,0 +1,32 @@
+.button {
+    display: grid;
+    place-content: center;
+    height: 44px;
+    padding: 8px 12px;
+    background-color: var(--color-orange);
+    border-radius: var(--button-radius);
+    border: none;
+    cursor: pointer;
+}
+
+.secondary {
+  justify-self: end;
+  background-color: transparent;
+  transform: translateY(-15px);
+}
+
+.text {
+    font-family: Manrope, sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 27px;
+    color: var(--color-white);
+    text-transform: uppercase;
+}
+
+.secondary > .text{
+  color: var(--color-orange);
+  text-transform: none;
+  font-size: 16px;
+  line-height: 22px;
+}

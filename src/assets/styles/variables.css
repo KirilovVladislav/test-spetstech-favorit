@@ -1,0 +1,10 @@
+:root {
+  --card-bg-color: #fff;
+  --card-radius: 20px;
+  --button-radius: 5px;
+  --bg-img: url('/src/assets/img/fon.jpg');
+  --color-black: #000;
+  --color-white: #fff;
+  --color-gray: #989898;
+  --color-orange: #F6B52E;
+}

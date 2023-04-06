@@ -1,0 +1,32 @@
+/* stylelint-disable comment-empty-line-before */
+.card {
+  background-color: var(--card-bg-color);
+  border-radius: var(--card-radius);
+  box-shadow: -10px 7px 20px rgb(0 0 0 / 25%);
+  width: 343px;
+  height: 504px;
+  display: grid;
+  align-content: space-between;
+  padding: 10px;
+  padding-top: 0;
+  padding-bottom: 43px;
+}
+
+@media (width >= 1365px) {
+  .card {
+    width: 411px;
+    padding: 34px;
+    padding-top: 0;
+    padding-bottom: 43px;
+  }
+}
+
+@media (width >= 1920px) {
+  .card {
+    width: 516px;
+    height: 608px;
+    padding: 86px;
+    padding-top: 56px;
+    padding-bottom: 92px;
+  }
+}
