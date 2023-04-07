@@ -6,7 +6,7 @@ export const loginValidation = (email: string) => {
     return null;
   }
   if (email.trim() === '') {
-    return 'Email is required.';
+    return 'Phone number is required.';
   }
   return 'Please enter a valid phone number.';
 };

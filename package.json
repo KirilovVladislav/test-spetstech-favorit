@@ -11,7 +11,8 @@
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
     "stylelint": "stylelint **/*.css",
-    "stylelint:fix": "npm run stylelint -- --fix"
+    "stylelint:fix": "npm run stylelint -- --fix",
+    "server": "json-server --watch db.json"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.3",
@@ -40,6 +41,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-testing-library": "^5.10.2",
     "jsdom": "^21.1.1",
+    "json-server": "^0.17.3",
     "prettier": "^2.8.7",
     "stylelint": "^15.4.0",
     "stylelint-config-standard": "^32.0.0",

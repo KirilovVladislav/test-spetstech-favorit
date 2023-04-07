@@ -1,26 +1,42 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { Logo, Card, InputGroup, Form, Button } from '@/components';
 import styles from './Login.module.css';
 import { loginValidation, passwordValidation, pattern } from '@/utils/validate';
 
+const fetchUser = async (
+  authData: { login: string; password: string },
+  restorePassword = false
+) => {
+  const res = await fetch(
+    `http://localhost:3000/users?login=${authData.login}`
+  );
+
+  if (res.ok) {
+    const data = await res.json();
+
+    if (data[0].password === authData.password) return data;
+
+    if (restorePassword) {
+      return data;
+    }
+  }
+};
+
 export function Login() {
-  const [authData, setAuthData] = useState<{
-    login: string;
-    password: string;
-  } | null>(null);
+  const [user, setUser] = useState<any>(null);
   const [restorePassword, setRestorePassword] = useState(false);
-  const [telNumber, setTelNumber] = useState('');
+  const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const [validateMessage, setValidateMessage] = useState<string | null>(null);
 
   const handleGoOut = () => {
-    setAuthData(null);
+    setUser(null);
   };
 
   const handleSubmitForm = (evt: FormEvent) => {
     evt.preventDefault();
-    const loginMessage = loginValidation(telNumber);
-    const passwordMessage = passwordValidation(password);
+    const loginMessage = loginValidation(login);
+    const passwordMessage = !restorePassword && passwordValidation(password);
 
     if (loginMessage) {
       setValidateMessage(loginMessage);
@@ -31,14 +47,33 @@ export function Login() {
     }
 
     if (!loginMessage && !passwordMessage) {
-      setAuthData({
-        login: telNumber.replace(pattern, '+7 $2 $3 $4 $5'),
-        password,
+      console.log('hi');
+      fetchUser(
+        {
+          // login: telNumber.replace(pattern, '+7 $2 $3 $4 $5'),
+          login: login.replace(pattern, '7 $2 $3 $4 $5'),
+          password,
+        },
+        restorePassword
+      ).then((data) => {
+        if (data) {
+          if (restorePassword) {
+            setValidateMessage(`Ваш пароль ${data[0].password}`);
+          }
+          setUser(data[0]);
+          setLogin('');
+          setPassword('');
+        } else {
+          setValidateMessage('Неверные данные');
+        }
       });
-      setTelNumber('');
-      setPassword('');
     }
+    // setValidateMessage(null);
   };
+
+  useEffect(() => {
+    setValidateMessage(null);
+  }, [restorePassword]);
 
   return (
     <main>
@@ -51,20 +86,20 @@ export function Login() {
         {validateMessage && (
           <span className={styles.error}>{validateMessage}</span>
         )}
-        {!authData ? (
+        {!user ? (
           <Form>
             {restorePassword ? (
               <InputGroup
-                value={telNumber}
-                handleChange={setTelNumber}
+                value={login}
+                handleChange={setLogin}
                 label={'Введите номер телефона '}
                 // type={'tel'}
               />
             ) : (
               <>
                 <InputGroup
-                  value={telNumber}
-                  handleChange={setTelNumber}
+                  value={login}
+                  handleChange={setLogin}
                   label={'Введите логин'}
                   // type={'tel'}
                 />
@@ -83,7 +118,7 @@ export function Login() {
               {restorePassword ? 'назад' : 'Забыли пароль?'}
             </Button>
             <Button type={'submit'} handler={handleSubmitForm}>
-              Войти
+              {restorePassword ? 'Восстановить пароль' : 'Войти'}
             </Button>
           </Form>
         ) : (
